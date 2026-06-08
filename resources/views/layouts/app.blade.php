@@ -32,7 +32,23 @@
         body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--gray-900); min-height: 100vh; display: flex; }
 
         /* SIDEBAR */
-        .sidebar { width: var(--sidebar-w); background: var(--primary-dark); min-height: 100vh; position: fixed; top: 0; left: 0; display: flex; flex-direction: column; z-index: 100; }
+        .sidebar { 
+            width: var(--sidebar-w); 
+            background: var(--primary-dark); 
+            height: 100vh; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            display: flex; 
+            flex-direction: column; 
+            z-index: 100; 
+            overflow-y: auto; 
+            scrollbar-width: thin; 
+            scrollbar-color: rgba(255,255,255,0.2) transparent; 
+        }
+        .sidebar::-webkit-scrollbar { width: 4px; }
+        .sidebar::-webkit-scrollbar-track { background: transparent; }
+        .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
         .sidebar-logo { padding: 20px 16px 16px; border-bottom: 1px solid rgba(255,255,255,.1); }
         .sidebar-logo .logo-icon { width: 42px; height: 42px; background: var(--accent); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 10px; }
         .sidebar-logo h2 { color: #fff; font-size: 15px; font-weight: 700; line-height: 1.3; }
