@@ -194,14 +194,8 @@
             <i class="fas fa-arrow-up" style="color:#f59e0b"></i> Barang Keluar
         </a>
         <div class="nav-section-label">Rusak & Return</div>
-        <a href="{{ route('rusak.index') }}" class="nav-item nav-sub {{ request()->routeIs('rusak.*') ? 'active' : '' }}">
+        <a href="{{ route('rusak.index') }}" class="nav-item {{ request()->routeIs('rusak.*') ? 'active' : '' }}">
             <i class="fas fa-triangle-exclamation" style="color:#ef4444"></i> Lihat Semua
-        </a>
-        <a href="{{ route('rusak.create.rusak') }}" class="nav-item nav-sub {{ request()->is('inventaris/rusak/tambah-rusak*') ? 'active' : '' }}">
-            <i class="fas fa-triangle-exclamation" style="color:#ef4444"></i> Catat Rusak
-        </a>
-        <a href="{{ route('rusak.create.return') }}" class="nav-item nav-sub {{ request()->is('inventaris/rusak/tambah-return*') ? 'active' : '' }}">
-            <i class="fas fa-rotate-left" style="color:#d97706"></i> Catat Return
         </a>
         <a href="{{ route('laporan.index') }}" class="nav-item {{ request()->routeIs('laporan.*') ? 'active' : '' }}">
             <i class="fas fa-file-chart-column"></i> Laporan Stok
@@ -215,9 +209,6 @@
         </a>
         <a href="{{ route('aset.lokasi.index') }}" class="nav-item {{ request()->routeIs('aset.lokasi.*') ? 'active' : '' }}">
             <i class="fas fa-location-dot"></i> Kelola Lokasi
-        </a>
-        <a href="{{ route('aset.create') }}" class="nav-item {{ request()->is('aset/tambah*') ? 'active' : '' }}">
-            <i class="fas fa-plus-circle"></i> Tambah Aset
         </a>
     </div>
     <div class="sidebar-footer">
