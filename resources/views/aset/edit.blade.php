@@ -48,7 +48,7 @@
                         @foreach($lokasiList as $lok)
                             <option value="{{ $lok }}" {{ (old('lokasi', $aset->lokasi)===$lok) ? 'selected' : '' }}>{{ $lok }}</option>
                         @endforeach
-                        @foreach(['Area Kasir','Area Jual','Gudang','Dapur/Pantry','Area Parkir','Seluruh Toko'] as $def)
+                        @foreach(['Gudang','Seluruh Toko'] as $def)
                             @if(!$lokasiList->contains($def))
                                 <option value="{{ $def }}" {{ (old('lokasi', $aset->lokasi)===$def) ? 'selected' : '' }}>{{ $def }}</option>
                             @endif
