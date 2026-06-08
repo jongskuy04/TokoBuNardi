@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Catat Return Barang')
+@section('title', 'Catat Retur Barang')
 
 @section('content')
 <div class="page-header">
     <div>
-        <h1><i class="fas fa-rotate-left" style="color:#854d0e"></i> Catat Return Barang</h1>
-        <div class="breadcrumb">Inventaris › Rusak & Return › Catat Return</div>
+        <h1><i class="fas fa-rotate-left" style="color:#854d0e"></i> Catat Retur Barang</h1>
+        <div class="breadcrumb">Inventaris › Rusak & Retur › Catat Retur</div>
     </div>
     <a href="{{ route('rusak.index') }}" class="btn btn-outline">
         <i class="fas fa-arrow-left"></i> Kembali
@@ -16,7 +16,7 @@
 <div class="info-box mb-4">
     <i class="fas fa-circle-info"></i>
     <div>
-        <strong>Return Barang</strong> — Pilih transaksi penjualan yang ingin di-return.
+        <strong>Retur Barang</strong> — Pilih transaksi penjualan yang ingin di-retur.
         Stok akan <strong>bertambah</strong> kembali dan omset akan <strong>berkurang</strong> sesuai harga jual saat transaksi.
     </div>
 </div>
@@ -26,7 +26,7 @@
     {{-- Kiri: Form --}}
     <div class="card">
         <div class="card-header">
-            <h3><i class="fas fa-file-pen"></i> Form Return</h3>
+            <h3><i class="fas fa-file-pen"></i> Form Retur</h3>
         </div>
         <div class="card-body">
             @if($errors->any())
@@ -42,7 +42,7 @@
                 <input type="hidden" name="barang_keluar_id" id="input_bk_id" value="{{ old('barang_keluar_id') }}">
 
                 <div class="form-group">
-                    <label>Kode Transaksi Return</label>
+                    <label>Kode Transaksi Retur</label>
                     <input type="text" name="kode_transaksi" class="form-control"
                            value="{{ old('kode_transaksi', $kode) }}" required>
                     @error('kode_transaksi')<div class="invalid-feedback">{{ $message }}</div>@enderror
@@ -50,7 +50,7 @@
 
                 {{-- Info transaksi yang dipilih --}}
                 <div class="form-group" id="selected-info" style="{{ old('barang_keluar_id') ? '' : 'display:none' }}">
-                    <label>Transaksi yang Di-return</label>
+                    <label>Transaksi yang Di-retur</label>
                     <div class="selected-trx" id="selected-trx-display">
                         @if(old('barang_keluar_id'))
                             @php $bkOld = $barangKeluar->firstWhere('id', old('barang_keluar_id')); @endphp
@@ -63,7 +63,7 @@
                                 </div>
                                 <div class="trx-meta">
                                     Harga jual: <strong>{{ \App\Helpers\InvenHelper::rupiah($bkOld->harga_jual) }}</strong>/unit &bull;
-                                    Sisa bisa return: <strong>{{ $bkOld->sisa_return }} unit</strong>
+                                    Sisa bisa retur: <strong>{{ $bkOld->sisa_return }} unit</strong>
                                 </div>
                             @endif
                         @endif
@@ -74,7 +74,7 @@
                 </div>
 
                 <div class="form-group" id="group-jumlah" style="{{ old('barang_keluar_id') ? '' : 'display:none' }}">
-                    <label>Jumlah Return <span class="required">*</span></label>
+                    <label>Jumlah Retur <span class="required">*</span></label>
                     <input type="number" name="jumlah" id="input_jumlah" class="form-control {{ $errors->has('jumlah') ? 'is-invalid' : '' }}"
                            value="{{ old('jumlah', 1) }}" min="1" required>
                     <div class="hint" id="hint-maks"></div>
@@ -82,7 +82,7 @@
                 </div>
 
                 <div class="form-group" id="group-tanggal" style="{{ old('barang_keluar_id') ? '' : 'display:none' }}">
-                    <label>Tanggal Return <span class="required">*</span></label>
+                    <label>Tanggal Retur <span class="required">*</span></label>
                     <input type="date" name="tanggal" class="form-control {{ $errors->has('tanggal') ? 'is-invalid' : '' }}"
                            value="{{ old('tanggal', date('Y-m-d')) }}" required>
                     @error('tanggal')<div class="invalid-feedback">{{ $message }}</div>@enderror
@@ -91,22 +91,22 @@
                 <div class="form-group" id="group-sumber" style="{{ old('barang_keluar_id') ? '' : 'display:none' }}">
                     <label>Nama Pembeli <small style="color:var(--gray-500)">(opsional, otomatis dari transaksi)</small></label>
                     <input type="text" name="sumber" class="form-control" id="input_sumber"
-                           value="{{ old('sumber') }}" placeholder="Nama pembeli yang return">
+                           value="{{ old('sumber') }}" placeholder="Nama pembeli yang retur">
                 </div>
 
                 <div class="form-group" id="group-ket" style="{{ old('barang_keluar_id') ? '' : 'display:none' }}">
-                    <label>Alasan Return <small style="color:var(--gray-500)">(opsional)</small></label>
+                    <label>Alasan Retur <small style="color:var(--gray-500)">(opsional)</small></label>
                     <textarea name="keterangan" class="form-control" rows="2"
                               placeholder="Contoh: Barang tidak sesuai pesanan">{{ old('keterangan') }}</textarea>
                 </div>
 
                 <div id="group-submit" style="{{ old('barang_keluar_id') ? '' : 'display:none' }}">
-                    {{-- Preview pengurangan omset --}}
+                    {{-- Preview omset --}}
                     <div class="omset-preview" id="omset-preview"></div>
 
                     <div style="display:flex;gap:10px;margin-top:12px">
                         <button type="submit" class="btn btn-warning">
-                            <i class="fas fa-rotate-left"></i> Proses Return
+                            <i class="fas fa-rotate-left"></i> Proses Retur
                         </button>
                         <a href="{{ route('rusak.index') }}" class="btn btn-outline">Batal</a>
                     </div>
@@ -157,7 +157,7 @@
                         <div style="font-size:11px;color:var(--gray-500)">Terjual</div>
                         <div style="font-weight:800;font-size:16px">{{ $bk->jumlah }}</div>
                         <div style="font-size:10px;color:#166534;background:#dcfce7;padding:2px 6px;border-radius:4px;margin-top:2px">
-                            Sisa return: {{ $bk->sisa_return }}
+                            Sisa retur: {{ $bk->sisa_return }}
                         </div>
                     </div>
                 </div>
@@ -165,7 +165,7 @@
             @empty
             <div style="padding:32px;text-align:center;color:var(--gray-500)">
                 <i class="fas fa-inbox" style="font-size:28px;display:block;margin-bottom:8px"></i>
-                Tidak ada transaksi penjualan yang bisa di-return.
+                Tidak ada transaksi penjualan yang bisa di-retur.
             </div>
             @endforelse
         </div>
@@ -229,7 +229,7 @@ function selectTrx(el) {
     document.getElementById('selected-trx-display').innerHTML = `
         <div class="trx-name">${nama}</div>
         <div class="trx-meta">${kode} &bull; ${tgl} &bull; Pembeli: ${pembeli}</div>
-        <div class="trx-meta">Harga jual: <strong>${hargaFmt}</strong>/unit &bull; Sisa bisa return: <strong>${sisa} unit</strong></div>
+        <div class="trx-meta">Harga jual: <strong>${hargaFmt}</strong>/unit &bull; Sisa bisa retur: <strong>${sisa} unit</strong></div>
     `;
 
     // Pre-fill pembeli

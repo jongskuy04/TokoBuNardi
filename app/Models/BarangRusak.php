@@ -42,7 +42,7 @@ class BarangRusak extends Model
     {
         return match ($this->jenis) {
             'rusak'  => 'Barang Rusak',
-            'return' => 'Return',
+            'return' => 'Retur',
             default  => ucfirst($this->jenis),
         };
     }

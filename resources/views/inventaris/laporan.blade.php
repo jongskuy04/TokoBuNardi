@@ -60,7 +60,7 @@
     <div class="stat-card">
         <div class="stat-icon" style="background:#fef9c3;color:#854d0e"><i class="fas fa-rotate-left"></i></div>
         <div>
-            <div class="label">Total Return</div>
+            <div class="label">Total Retur</div>
             <div class="value" style="color:#854d0e">{{ number_format($grandReturn) }}</div>
             <div class="sub">unit dikembalikan</div>
         </div>
@@ -70,13 +70,13 @@
         <div>
             <div class="label">Omset Kotor</div>
             <div class="value" style="color:#166534;font-size:14px">{{ InvenHelper::rupiah($grandOmsetKotor) }}</div>
-            <div class="sub">sebelum return</div>
+            <div class="sub">sebelum retur</div>
         </div>
     </div>
     <div class="stat-card">
         <div class="stat-icon" style="background:#fee2e2;color:#991b1b"><i class="fas fa-circle-minus"></i></div>
         <div>
-            <div class="label">Nilai Return</div>
+            <div class="label">Nilai Retur</div>
             <div class="value" style="color:#991b1b;font-size:14px">{{ InvenHelper::rupiah($grandNilaiReturn) }}</div>
             <div class="sub">omset dikurangi</div>
         </div>
@@ -86,7 +86,7 @@
         <div>
             <div class="label" style="color:#1e40af;font-weight:800">Omset Bersih</div>
             <div class="value" style="color:#1e40af;font-size:14px">{{ InvenHelper::rupiah($grandOmset) }}</div>
-            <div class="sub">setelah dikurangi return</div>
+            <div class="sub">setelah dikurangi retur</div>
         </div>
     </div>
     <div class="stat-card">
@@ -116,7 +116,7 @@
                     <th style="text-align:center">Masuk</th>
                     <th style="text-align:center">Terjual</th>
                     <th style="text-align:center">Rusak</th>
-                    <th style="text-align:center">Return</th>
+                    <th style="text-align:center">Retur</th>
                     <th style="text-align:center">Stok</th>
                     <th>Omset Kotor</th>
                     <th>Omset Bersih</th>

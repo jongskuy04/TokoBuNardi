@@ -51,7 +51,7 @@
     <div class="stat-card">
         <div class="stat-icon" style="background:#fce7f3;color:#be185d"><i class="fas fa-rotate-left"></i></div>
         <div>
-            <div class="label">Return (Bulan Ini)</div>
+            <div class="label">Retur (Bulan Ini)</div>
             <div class="value" style="color:#be185d">{{ number_format($totalReturn) }}</div>
             <div class="sub">unit dikembalikan</div>
         </div>
@@ -69,7 +69,7 @@
         <div>
             <div class="label" style="color:#1e40af;font-weight:800">Omset Bersih (Bulan Ini)</div>
             <div class="value" style="color:#1e40af;font-size:15px">{{ InvenHelper::rupiah($omsetBersih) }}</div>
-            <div class="sub">setelah dikurangi return</div>
+            <div class="sub">setelah dikurangi retur</div>
         </div>
     </div>
     <div class="stat-card">
@@ -155,7 +155,7 @@
                     $bg    = $isMasuk ? '#dcfce7' : ($isRusak ? '#fee2e2' : ($isReturn ? '#fef9c3' : '#fef9c3'));
                     $color = $isMasuk ? '#166534' : ($isRusak ? '#991b1b' : ($isReturn ? '#854d0e' : '#854d0e'));
                     $icon  = $isMasuk ? 'arrow-down' : ($isRusak ? 'triangle-exclamation' : ($isReturn ? 'rotate-left' : 'arrow-up'));
-                    $label = $isMasuk ? 'Masuk' : ($isRusak ? 'Rusak' : ($isReturn ? 'Return' : 'Keluar'));
+                    $label = $isMasuk ? 'Masuk' : ($isRusak ? 'Rusak' : ($isReturn ? 'Retur' : 'Keluar'));
                 @endphp
                 <div style="width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;
                      background:{{ $bg }};color:{{ $color }};font-size:14px;flex-shrink:0">
@@ -188,7 +188,7 @@
             <a href="{{ route('masuk.create') }}"  class="btn btn-success"><i class="fas fa-arrow-down"></i> Catat Barang Masuk</a>
             <a href="{{ route('keluar.create') }}" class="btn btn-warning"><i class="fas fa-arrow-up"></i> Catat Barang Keluar</a>
             <a href="{{ route('rusak.create.rusak') }}" class="btn btn-danger"><i class="fas fa-triangle-exclamation"></i> Catat Rusak</a>
-            <a href="{{ route('rusak.create.return') }}" class="btn btn-warning" style="background:#d97706;color:#fff"><i class="fas fa-rotate-left"></i> Catat Return</a>
+            <a href="{{ route('rusak.create.return') }}" class="btn btn-warning" style="background:#d97706;color:#fff"><i class="fas fa-rotate-left"></i> Catat Retur</a>
             <a href="{{ route('aset.index') }}" class="btn btn-outline" style="border-color:#1e40af;color:#1e40af"><i class="fas fa-couch"></i> Inventaris Aset</a>
             <a href="{{ route('laporan.index') }}" class="btn btn-outline"><i class="fas fa-file-chart-column"></i> Lihat Laporan</a>
         </div>

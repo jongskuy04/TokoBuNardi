@@ -138,7 +138,7 @@ class BarangRusakController extends Controller
 
         if ($request->jumlah > $sisaReturn) {
             return back()->withInput()
-                ->withErrors(['jumlah' => "Jumlah return melebihi sisa yang bisa di-return! Maksimal: {$sisaReturn} unit."]);
+                ->withErrors(['jumlah' => "Jumlah retur melebihi sisa yang bisa di-retur! Maksimal: {$sisaReturn} unit."]);
         }
 
         DB::transaction(function () use ($request, $barangKeluar) {
@@ -161,7 +161,7 @@ class BarangRusakController extends Controller
 
         $nilaiReturn = InvenHelper::rupiah($request->jumlah * $barangKeluar->harga_jual);
         return redirect()->route('rusak.index')
-            ->with('success', "Return berhasil dicatat. Stok bertambah. Omset berkurang {$nilaiReturn}.");
+            ->with('success', "Retur berhasil dicatat. Stok bertambah. Omset berkurang {$nilaiReturn}.");
     }
 
     /** Router store */

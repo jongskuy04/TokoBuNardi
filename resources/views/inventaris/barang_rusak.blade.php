@@ -1,19 +1,19 @@
 @extends('layouts.app')
 
-@section('title', 'Barang Rusak & Return')
+@section('title', 'Barang Rusak & Retur')
 
 @section('content')
 <div class="page-header">
     <div>
-        <h1><i class="fas fa-triangle-exclamation" style="color:var(--danger)"></i> Barang Rusak & Return</h1>
-        <div class="breadcrumb">Inventaris › Barang Rusak & Return</div>
+        <h1><i class="fas fa-triangle-exclamation" style="color:var(--danger)"></i> Barang Rusak & Retur</h1>
+        <div class="breadcrumb">Inventaris › Barang Rusak & Retur</div>
     </div>
     <div class="btn-group">
         <a href="{{ route('rusak.create.rusak') }}" class="btn btn-danger">
             <i class="fas fa-triangle-exclamation"></i> Catat Rusak
         </a>
         <a href="{{ route('rusak.create.return') }}" class="btn btn-warning">
-            <i class="fas fa-rotate-left"></i> Catat Return
+            <i class="fas fa-rotate-left"></i> Catat Retur
         </a>
     </div>
 </div>
@@ -31,7 +31,7 @@
     <div class="stat-card">
         <div class="stat-icon" style="background:#fef9c3;color:#854d0e"><i class="fas fa-rotate-left"></i></div>
         <div>
-            <div class="label">Return</div>
+            <div class="label">Retur</div>
             <div class="value" style="color:#854d0e">{{ number_format($totalReturn) }}</div>
             <div class="sub">unit bulan ini</div>
         </div>
@@ -41,7 +41,7 @@
         <div>
             <div class="label">Omset Berkurang</div>
             <div class="value" style="color:#991b1b;font-size:15px">{{ \App\Helpers\InvenHelper::rupiah($totalNilaiReturn) }}</div>
-            <div class="sub">dari return bulan ini</div>
+            <div class="sub">dari retur bulan ini</div>
         </div>
     </div>
     <div class="stat-card">
@@ -49,7 +49,7 @@
         <div>
             <div class="label">Total Dicatat</div>
             <div class="value">{{ number_format($totalUnit) }}</div>
-            <div class="sub">unit (rusak + return)</div>
+            <div class="sub">unit (rusak + retur)</div>
         </div>
     </div>
 </div>
@@ -76,7 +76,7 @@
             <select name="jenis" class="form-control" style="width:auto">
                 <option value="" {{ $jenis === '' ? 'selected' : '' }}>Semua</option>
                 <option value="rusak"  {{ $jenis === 'rusak'  ? 'selected' : '' }}>Rusak</option>
-                <option value="return" {{ $jenis === 'return' ? 'selected' : '' }}>Return</option>
+                <option value="return" {{ $jenis === 'return' ? 'selected' : '' }}>Retur</option>
             </select>
             <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-filter"></i> Filter</button>
         </form>

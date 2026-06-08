@@ -6,7 +6,7 @@
 <div class="page-header">
     <div>
         <h1><i class="fas fa-triangle-exclamation" style="color:var(--danger)"></i> Catat Barang Rusak</h1>
-        <div class="breadcrumb">Inventaris › Rusak & Return › Tambah Rusak</div>
+        <div class="breadcrumb">Inventaris › Rusak & Retur › Tambah Rusak</div>
     </div>
     <a href="{{ route('rusak.index') }}" class="btn btn-outline">
         <i class="fas fa-arrow-left"></i> Kembali
@@ -17,8 +17,8 @@
     <i class="fas fa-circle-info"></i>
     <div>
         <strong>Barang Rusak</strong> — Stok akan <strong>berkurang</strong>. Gunakan ini untuk barang yang rusak/cacat dan tidak bisa dijual.
-        Jika ingin mencatat <strong>return dari pembeli</strong>, gunakan menu
-        <a href="{{ route('rusak.create.return') }}"><i class="fas fa-rotate-left"></i> Catat Return</a>.
+        Jika ingin mencatat <strong>retur dari pembeli</strong>, gunakan menu
+        <a href="{{ route('rusak.create.return') }}"><i class="fas fa-rotate-left"></i> Catat Retur</a>.
     </div>
 </div>
 
