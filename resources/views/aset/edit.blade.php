@@ -42,19 +42,12 @@
             <div style="display:grid;grid-template-columns:1fr;gap:16px">
                 <div class="form-group">
                     <label>Lokasi</label>
-                    <select name="lokasi" class="form-control" id="sel-lokasi" onchange="toggleLokBaru()">
-                        <option value="">-- Pilih --</option>
-                        <option value="__baru__">+ Tambah Lokasi Baru</option>
+                    <select name="lokasi" class="form-control">
+                        <option value="">-- Pilih Lokasi --</option>
                         @foreach($lokasiList as $lok)
                             <option value="{{ $lok }}" {{ (old('lokasi', $aset->lokasi)===$lok) ? 'selected' : '' }}>{{ $lok }}</option>
                         @endforeach
-                        @foreach(['Gudang','Seluruh Toko'] as $def)
-                            @if(!$lokasiList->contains($def))
-                                <option value="{{ $def }}" {{ (old('lokasi', $aset->lokasi)===$def) ? 'selected' : '' }}>{{ $def }}</option>
-                            @endif
-                        @endforeach
                     </select>
-                    <input type="text" name="lokasi_baru" id="lok-baru" class="form-control mt-1" style="display:none" placeholder="Lokasi baru...">
                 </div>
             </div>
 
@@ -120,11 +113,4 @@ label { display:block; font-size:13px; font-weight:600; color:var(--gray-700); m
 .alert-danger { background:#fee2e2; color:#991b1b; border:1px solid #fecaca; }
 .mb-4 { margin-bottom:16px; }
 </style>
-<script>
-function toggleLokBaru() {
-    const sel = document.getElementById('sel-lokasi');
-    document.getElementById('lok-baru').style.display = sel.value === '__baru__' ? '' : 'none';
-    if (sel.value === '__baru__') sel.value = '';
-}
-</script>
 @endsection

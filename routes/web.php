@@ -10,6 +10,7 @@ use App\Http\Controllers\BarangKeluarController;
 use App\Http\Controllers\BarangRusakController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\AsetController;
+use App\Http\Controllers\LokasiAsetController;
 
 // AUTH
 Route::get('/login',  [AuthController::class, 'showLogin'])->name('login');
@@ -73,6 +74,15 @@ Route::middleware('auth')->group(function () {
 
     // ASET TOKO
     Route::prefix('aset')->name('aset.')->group(function () {
+        // Lokasi
+        Route::prefix('lokasi')->name('lokasi.')->group(function () {
+            Route::get('/',          [LokasiAsetController::class, 'index'])->name('index');
+            Route::post('/',         [LokasiAsetController::class, 'store'])->name('store');
+            Route::get('/{id}/edit', [LokasiAsetController::class, 'edit'])->name('edit');
+            Route::put('/{id}',      [LokasiAsetController::class, 'update'])->name('update');
+            Route::delete('/{id}',   [LokasiAsetController::class, 'destroy'])->name('destroy');
+        });
+
         Route::get('/',          [AsetController::class, 'index'])->name('index');
         Route::get('/tambah',    [AsetController::class, 'create'])->name('create');
         Route::post('/tambah',   [AsetController::class, 'store'])->name('store');

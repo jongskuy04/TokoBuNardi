@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Aset;
+use App\Models\LokasiAset;
 use App\Helpers\InvenHelper;
 use Illuminate\Http\Request;
 
@@ -43,7 +44,7 @@ class AsetController extends Controller
     public function create()
     {
         $kode         = Aset::generateKode();
-        $lokasiList   = Aset::select('lokasi')->distinct()->whereNotNull('lokasi')->pluck('lokasi');
+        $lokasiList   = LokasiAset::orderBy('nama_lokasi')->pluck('nama_lokasi');
         return view('aset.create', compact('kode', 'lokasiList'));
     }
 
@@ -79,7 +80,7 @@ class AsetController extends Controller
     public function edit(int $id)
     {
         $aset         = Aset::findOrFail($id);
-        $lokasiList   = Aset::select('lokasi')->distinct()->whereNotNull('lokasi')->pluck('lokasi');
+        $lokasiList   = LokasiAset::orderBy('nama_lokasi')->pluck('nama_lokasi');
         return view('aset.edit', compact('aset', 'lokasiList'));
     }
 
