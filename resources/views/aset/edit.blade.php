@@ -39,23 +39,7 @@
                 </div>
             </div>
 
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
-                <div class="form-group">
-                    <label>Kategori Aset</label>
-                    <select name="kategori_aset" class="form-control" id="sel-kategori" onchange="toggleKatBaru()">
-                        <option value="">-- Pilih --</option>
-                        <option value="__baru__">+ Tambah Kategori Baru</option>
-                        @foreach($kategoriList as $kat)
-                            <option value="{{ $kat }}" {{ (old('kategori_aset', $aset->kategori_aset)===$kat) ? 'selected' : '' }}>{{ $kat }}</option>
-                        @endforeach
-                        @foreach(['Perabot','Elektronik','Alat Ukur & Timbang','Perlengkapan Kasir','Kendaraan','Keamanan','Lainnya'] as $def)
-                            @if(!$kategoriList->contains($def))
-                                <option value="{{ $def }}" {{ (old('kategori_aset', $aset->kategori_aset)===$def) ? 'selected' : '' }}>{{ $def }}</option>
-                            @endif
-                        @endforeach
-                    </select>
-                    <input type="text" name="kategori_aset_baru" id="kat-baru" class="form-control mt-1" style="display:none" placeholder="Kategori baru...">
-                </div>
+            <div style="display:grid;grid-template-columns:1fr;gap:16px">
                 <div class="form-group">
                     <label>Lokasi</label>
                     <select name="lokasi" class="form-control" id="sel-lokasi" onchange="toggleLokBaru()">
@@ -137,11 +121,6 @@ label { display:block; font-size:13px; font-weight:600; color:var(--gray-700); m
 .mb-4 { margin-bottom:16px; }
 </style>
 <script>
-function toggleKatBaru() {
-    const sel = document.getElementById('sel-kategori');
-    document.getElementById('kat-baru').style.display = sel.value === '__baru__' ? '' : 'none';
-    if (sel.value === '__baru__') sel.value = '';
-}
 function toggleLokBaru() {
     const sel = document.getElementById('sel-lokasi');
     document.getElementById('lok-baru').style.display = sel.value === '__baru__' ? '' : 'none';

@@ -78,14 +78,8 @@
                 <option value="perlu_perbaikan" {{ $kondisi==='perlu_perbaikan' ? 'selected' : '' }}>Perlu Perbaikan</option>
                 <option value="rusak_berat" {{ $kondisi==='rusak_berat' ? 'selected' : '' }}>Rusak Berat</option>
             </select>
-            <select name="kategori" class="form-control" style="width:auto">
-                <option value="">Semua Kategori</option>
-                @foreach($kategoriList as $kat)
-                    <option value="{{ $kat }}" {{ $kategori===$kat ? 'selected' : '' }}>{{ $kat }}</option>
-                @endforeach
-            </select>
             <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-filter"></i> Filter</button>
-            @if($q || $kondisi || $kategori)
+            @if($q || $kondisi)
                 <a href="{{ route('aset.index') }}" class="btn btn-outline btn-sm"><i class="fas fa-times"></i> Reset</a>
             @endif
         </form>
@@ -98,7 +92,6 @@
                         <th>#</th>
                         <th>Kode</th>
                         <th>Nama Aset</th>
-                        <th>Kategori</th>
                         <th style="text-align:center">Jumlah</th>
                         <th>Kondisi</th>
                         <th>Lokasi</th>
@@ -119,7 +112,6 @@
                                 <div style="font-size:11px;color:var(--gray-500)">{{ Str::limit($a->keterangan, 40) }}</div>
                             @endif
                         </td>
-                        <td>{{ $a->kategori_aset ?: '—' }}</td>
                         <td style="text-align:center"><strong>{{ $a->jumlah }}</strong> {{ $a->satuan }}</td>
                         <td>
                             <span class="badge {{ $a->badgeKondisi() }}">
@@ -154,7 +146,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="11" style="text-align:center;padding:40px;color:var(--gray-500)">
+                        <td colspan="10" style="text-align:center;padding:40px;color:var(--gray-500)">
                             <i class="fas fa-box-open" style="font-size:32px;display:block;margin-bottom:10px"></i>
                             Belum ada aset yang dicatat.
                             <br><a href="{{ route('aset.create') }}" style="color:var(--primary)">Tambah aset sekarang</a>
@@ -165,7 +157,7 @@
                 @if($aset->isNotEmpty())
                 <tfoot>
                     <tr style="background:var(--gray-100);font-weight:700">
-                        <td colspan="4" style="padding:11px 14px">TOTAL</td>
+                        <td colspan="3" style="padding:11px 14px">TOTAL</td>
                         <td style="text-align:center">{{ number_format($totalItem) }}</td>
                         <td colspan="4"></td>
                         <td style="color:var(--primary)">{{ InvenHelper::rupiah($totalNilai) }}</td>

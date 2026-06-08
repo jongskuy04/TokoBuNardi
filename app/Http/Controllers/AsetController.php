@@ -12,7 +12,6 @@ class AsetController extends Controller
     {
         $q        = $request->get('q', '');
         $kondisi  = $request->get('kondisi', '');
-        $kategori = $request->get('kategori', '');
 
         $query = Aset::query();
 
@@ -24,9 +23,8 @@ class AsetController extends Controller
             });
         }
         if ($kondisi) $query->where('kondisi', $kondisi);
-        if ($kategori) $query->where('kategori_aset', $kategori);
 
-        $aset = $query->orderBy('kategori_aset')->orderBy('nama_aset')->get();
+        $aset = $query->orderBy('nama_aset')->get();
 
         // Statistik
         $totalItem    = $aset->sum('jumlah');
@@ -35,23 +33,18 @@ class AsetController extends Controller
         $jumlahPerlu  = $aset->where('kondisi', 'perlu_perbaikan')->count();
         $jumlahRusak  = $aset->where('kondisi', 'rusak_berat')->count();
 
-        // Daftar kategori & lokasi untuk filter
-        $kategoriList = Aset::select('kategori_aset')->distinct()->whereNotNull('kategori_aset')->pluck('kategori_aset');
-
         return view('aset.index', compact(
-            'aset', 'q', 'kondisi', 'kategori',
+            'aset', 'q', 'kondisi',
             'totalItem', 'totalNilai',
-            'jumlahBaik', 'jumlahPerlu', 'jumlahRusak',
-            'kategoriList'
+            'jumlahBaik', 'jumlahPerlu', 'jumlahRusak'
         ));
     }
 
     public function create()
     {
         $kode         = Aset::generateKode();
-        $kategoriList = Aset::select('kategori_aset')->distinct()->whereNotNull('kategori_aset')->pluck('kategori_aset');
         $lokasiList   = Aset::select('lokasi')->distinct()->whereNotNull('lokasi')->pluck('lokasi');
-        return view('aset.create', compact('kode', 'kategoriList', 'lokasiList'));
+        return view('aset.create', compact('kode', 'lokasiList'));
     }
 
     public function store(Request $request)
@@ -70,7 +63,6 @@ class AsetController extends Controller
         Aset::create([
             'kode_aset'         => $request->kode_aset,
             'nama_aset'         => $request->nama_aset,
-            'kategori_aset'     => $request->kategori_aset ?: $request->kategori_aset_baru,
             'jumlah'            => $request->jumlah,
             'satuan'            => $request->satuan ?: 'unit',
             'harga_perolehan'   => $request->harga_perolehan ?: 0,
@@ -87,9 +79,8 @@ class AsetController extends Controller
     public function edit(int $id)
     {
         $aset         = Aset::findOrFail($id);
-        $kategoriList = Aset::select('kategori_aset')->distinct()->whereNotNull('kategori_aset')->pluck('kategori_aset');
         $lokasiList   = Aset::select('lokasi')->distinct()->whereNotNull('lokasi')->pluck('lokasi');
-        return view('aset.edit', compact('aset', 'kategoriList', 'lokasiList'));
+        return view('aset.edit', compact('aset', 'lokasiList'));
     }
 
     public function update(Request $request, int $id)
@@ -106,7 +97,6 @@ class AsetController extends Controller
         $aset->update([
             'kode_aset'         => $request->kode_aset,
             'nama_aset'         => $request->nama_aset,
-            'kategori_aset'     => $request->kategori_aset ?: $request->kategori_aset_baru,
             'jumlah'            => $request->jumlah,
             'satuan'            => $request->satuan ?: 'unit',
             'harga_perolehan'   => $request->harga_perolehan ?: 0,

@@ -40,24 +40,7 @@
                 </div>
             </div>
 
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
-                <div class="form-group">
-                    <label>Kategori Aset</label>
-                    <select name="kategori_aset" class="form-control" id="sel-kategori" onchange="toggleKatBaru()">
-                        <option value="">-- Pilih atau ketik baru --</option>
-                        <option value="__baru__">+ Tambah Kategori Baru</option>
-                        @foreach($kategoriList as $kat)
-                            <option value="{{ $kat }}" {{ old('kategori_aset')===$kat ? 'selected' : '' }}>{{ $kat }}</option>
-                        @endforeach
-                        @foreach(['Perabot','Elektronik','Alat Ukur & Timbang','Perlengkapan Kasir','Kendaraan','Keamanan','Lainnya'] as $def)
-                            @if(!$kategoriList->contains($def))
-                                <option value="{{ $def }}" {{ old('kategori_aset')===$def ? 'selected' : '' }}>{{ $def }}</option>
-                            @endif
-                        @endforeach
-                    </select>
-                    <input type="text" name="kategori_aset_baru" id="kat-baru" class="form-control mt-1"
-                           placeholder="Nama kategori baru..." style="display:none">
-                </div>
+            <div style="display:grid;grid-template-columns:1fr;gap:16px">
                 <div class="form-group">
                     <label>Lokasi</label>
                     <select name="lokasi" class="form-control" id="sel-lokasi" onchange="toggleLokBaru()">
@@ -127,21 +110,7 @@
     </div>
 </div>
 
-{{-- Panduan kategori --}}
 <div>
-    <div class="card" style="margin-bottom:16px">
-        <div class="card-header"><h3><i class="fas fa-lightbulb" style="color:#f59e0b"></i> Panduan Kategori</h3></div>
-        <div class="card-body" style="padding:14px 16px">
-            <div style="font-size:12.5px;color:var(--gray-700);line-height:1.8">
-                <div><strong>🪑 Perabot</strong> — Etalase, rak, meja, kursi, lemari</div>
-                <div><strong>⚡ Elektronik</strong> — AC, kipas, lampu, CCTV, speaker</div>
-                <div><strong>⚖️ Alat Ukur & Timbang</strong> — Timbangan, meteran, takaran</div>
-                <div><strong>🖥️ Perlengkapan Kasir</strong> — Mesin kasir, printer struk, scanner</div>
-                <div><strong>🚗 Kendaraan</strong> — Motor, gerobak, sepeda</div>
-                <div><strong>🔒 Keamanan</strong> — Kunci, gembok, brankas</div>
-            </div>
-        </div>
-    </div>
     <div class="card">
         <div class="card-header"><h3><i class="fas fa-circle-info" style="color:var(--primary)"></i> Info</h3></div>
         <div class="card-body" style="padding:14px 16px;font-size:12.5px;color:var(--gray-700);line-height:1.8">
@@ -168,11 +137,6 @@ label { display:block; font-size:13px; font-weight:600; color:var(--gray-700); m
 .mb-4 { margin-bottom:16px; }
 </style>
 <script>
-function toggleKatBaru() {
-    const sel = document.getElementById('sel-kategori');
-    document.getElementById('kat-baru').style.display = sel.value === '__baru__' ? '' : 'none';
-    if (sel.value === '__baru__') sel.value = '';
-}
 function toggleLokBaru() {
     const sel = document.getElementById('sel-lokasi');
     document.getElementById('lok-baru').style.display = sel.value === '__baru__' ? '' : 'none';

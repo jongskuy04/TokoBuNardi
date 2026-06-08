@@ -10,7 +10,7 @@ class Aset extends Model
     protected $table = 'aset';
 
     protected $fillable = [
-        'kode_aset', 'nama_aset', 'kategori_aset',
+        'kode_aset', 'nama_aset',
         'jumlah', 'satuan', 'harga_perolehan',
         'tanggal_perolehan', 'kondisi', 'lokasi', 'keterangan',
     ];
