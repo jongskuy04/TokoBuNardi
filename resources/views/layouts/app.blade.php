@@ -6,6 +6,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Dashboard') — {{ config('app.name', 'Toko Bu Nardi') }}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Flatpickr CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <style>
         :root {
             --primary:      #1e40af;
@@ -103,8 +105,9 @@
         .form-group { display: flex; flex-direction: column; gap: 5px; }
         .form-group.full { grid-column: 1 / -1; }
         label { font-size: 13px; font-weight: 600; color: var(--gray-700); }
-        input[type=text], input[type=number], input[type=date], select, textarea { padding: 9px 12px; border: 1.5px solid var(--gray-200); border-radius: 7px; font-size: 13.5px; color: var(--gray-900); outline: none; transition: border .15s; background: var(--white); font-family: inherit; width: 100%; }
-        input:focus, select:focus, textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(59,130,246,.12); }
+        input[type=text], input[type=number], input[type=date], select, textarea, .flatpickr-input { padding: 9px 12px; border: 1.5px solid var(--gray-200); border-radius: 7px; font-size: 13.5px; color: var(--gray-900); outline: none; transition: border .15s; background: var(--white); font-family: inherit; width: 100%; }
+        input:focus, select:focus, textarea:focus, .flatpickr-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(59,130,246,.12); }
+        .flatpickr-input[readonly] { background-color: var(--white) !important; cursor: pointer; }
         .input-readonly { background: var(--gray-100); color: var(--gray-500); }
         .invalid-feedback { font-size: 12px; color: var(--danger); margin-top: 4px; }
         .is-invalid { border-color: var(--danger) !important; }
@@ -244,6 +247,9 @@
     </div>
 </div>
 
+<!-- Flatpickr JS -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/id.js"></script>
 <script>
 // Auto-hide alerts
 document.querySelectorAll('.alert').forEach(el => {
@@ -260,6 +266,16 @@ function confirmDelete(formId, msg) {
         document.getElementById(formId).submit();
     }
 }
+
+// Inisialisasi Flatpickr untuk semua input bertipe date
+document.addEventListener("DOMContentLoaded", function() {
+    flatpickr('input[type="date"]', {
+        altInput: true,
+        altFormat: "d/m/Y",
+        dateFormat: "Y-m-d",
+        locale: "id"
+    });
+});
 </script>
 @stack('scripts')
 </body>
