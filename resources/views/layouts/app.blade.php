@@ -204,11 +204,8 @@
 
     <div class="nav-section">
         <div class="nav-section-label">Aset Toko</div>
-        <a href="{{ route('aset.index') }}" class="nav-item {{ request()->routeIs('aset.*') && !request()->routeIs('aset.lokasi.*') ? 'active' : '' }}">
+        <a href="{{ route('aset.index') }}" class="nav-item {{ request()->routeIs('aset.*') ? 'active' : '' }}">
             <i class="fas fa-couch"></i> Inventaris Aset
-        </a>
-        <a href="{{ route('aset.lokasi.index') }}" class="nav-item {{ request()->routeIs('aset.lokasi.*') ? 'active' : '' }}">
-            <i class="fas fa-location-dot"></i> Kelola Lokasi
         </a>
     </div>
     <div class="sidebar-footer">

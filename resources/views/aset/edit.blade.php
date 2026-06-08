@@ -41,7 +41,12 @@
 
             <div style="display:grid;grid-template-columns:1fr;gap:16px">
                 <div class="form-group">
-                    <label>Lokasi</label>
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+                        <label style="margin:0">Lokasi</label>
+                        <a href="{{ route('aset.lokasi.index') }}" class="btn btn-outline btn-sm" style="padding:4px 8px;font-size:11.5px">
+                            <i class="fas fa-location-dot"></i> Kelola Lokasi
+                        </a>
+                    </div>
                     <select name="lokasi" class="form-control">
                         <option value="">-- Pilih Lokasi --</option>
                         @foreach($lokasiList as $lok)

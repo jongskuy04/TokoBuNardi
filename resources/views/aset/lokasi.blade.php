@@ -8,6 +8,9 @@
         <h1><i class="fas fa-location-dot" style="color:var(--primary);margin-right:8px"></i>Kelola Lokasi Aset</h1>
         <div class="breadcrumb">Aset Toko › Kelola Lokasi</div>
     </div>
+    <a href="{{ route('aset.index') }}" class="btn btn-outline">
+        <i class="fas fa-arrow-left"></i> Kembali ke Aset
+    </a>
 </div>
 
 <div style="display:grid;grid-template-columns:1fr 380px;gap:20px;align-items:start">
