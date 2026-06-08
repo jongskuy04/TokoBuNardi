@@ -195,7 +195,7 @@
         </a>
         <div class="nav-section-label">Rusak & Retur</div>
         <a href="{{ route('rusak.index') }}" class="nav-item {{ request()->routeIs('rusak.*') ? 'active' : '' }}">
-            <i class="fas fa-triangle-exclamation" style="color:#ef4444"></i> Lihat Semua
+            <i class="fas fa-triangle-exclamation" style="color:#ef4444"></i> Barang Rusak & Retur
         </a>
         <a href="{{ route('laporan.index') }}" class="nav-item {{ request()->routeIs('laporan.*') ? 'active' : '' }}">
             <i class="fas fa-file-chart-column"></i> Laporan Stok
