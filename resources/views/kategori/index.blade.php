@@ -8,6 +8,11 @@
         <h1><i class="fas fa-tags" style="color:#1e40af;margin-right:8px"></i>Kategori Produk</h1>
         <div class="breadcrumb">Produk › Kategori</div>
     </div>
+    <div class="btn-group">
+        <a href="{{ route('produk.index') }}" class="btn btn-outline">
+            <i class="fas fa-arrow-left"></i> Kembali ke Produk
+        </a>
+    </div>
 </div>
 
 <div style="display:grid;grid-template-columns:1fr 380px;gap:20px;align-items:start">

@@ -180,9 +180,6 @@
         <a href="{{ route('produk.index') }}" class="nav-item {{ request()->routeIs('produk.*') ? 'active' : '' }}">
             <i class="fas fa-box-open"></i> Data Produk
         </a>
-        <a href="{{ route('kategori.index') }}" class="nav-item {{ request()->routeIs('kategori.*') ? 'active' : '' }}">
-            <i class="fas fa-tags"></i> Kategori Produk
-        </a>
     </div>
 
     <div class="nav-section">

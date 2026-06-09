@@ -31,7 +31,12 @@
                     @error('nama_produk')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
                 <div class="form-group">
-                    <label>Kategori</label>
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+                        <label style="margin:0">Kategori</label>
+                        <a href="{{ route('kategori.index') }}" class="btn btn-outline btn-sm" style="padding:4px 8px;font-size:11.5px">
+                            <i class="fas fa-tags"></i> Kelola Kategori
+                        </a>
+                    </div>
                     <select name="kategori_id">
                         <option value="">-- Pilih Kategori --</option>
                         @foreach($kategoriList as $k)
