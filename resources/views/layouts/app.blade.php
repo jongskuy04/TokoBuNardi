@@ -180,15 +180,18 @@
         <a href="{{ route('produk.index') }}" class="nav-item {{ request()->routeIs('produk.*') ? 'active' : '' }}">
             <i class="fas fa-box-open"></i> Data Produk
         </a>
-    </div>
-
-    <div class="nav-section">
-        <div class="nav-section-label">Inventaris</div>
         <a href="{{ route('masuk.index') }}" class="nav-item {{ request()->routeIs('masuk.*') ? 'active' : '' }}">
             <i class="fas fa-arrow-down" style="color:#10b981"></i> Barang Masuk
         </a>
         <a href="{{ route('keluar.index') }}" class="nav-item {{ request()->routeIs('keluar.*') ? 'active' : '' }}">
             <i class="fas fa-arrow-up" style="color:#f59e0b"></i> Barang Keluar
+        </a>
+    </div>
+
+    <div class="nav-section">
+        <div class="nav-section-label">Inventaris</div>
+        <a href="{{ route('aset.index') }}" class="nav-item {{ request()->routeIs('aset.*') ? 'active' : '' }}">
+            <i class="fas fa-couch"></i> Inventaris Aset
         </a>
         <div class="nav-section-label">Rusak & Retur</div>
         <a href="{{ route('rusak.index') }}" class="nav-item {{ request()->routeIs('rusak.*') ? 'active' : '' }}">
@@ -196,13 +199,6 @@
         </a>
         <a href="{{ route('laporan.index') }}" class="nav-item {{ request()->routeIs('laporan.*') ? 'active' : '' }}">
             <i class="fas fa-file-chart-column"></i> Laporan Stok
-        </a>
-    </div>
-
-    <div class="nav-section">
-        <div class="nav-section-label">Aset Toko</div>
-        <a href="{{ route('aset.index') }}" class="nav-item {{ request()->routeIs('aset.*') ? 'active' : '' }}">
-            <i class="fas fa-couch"></i> Inventaris Aset
         </a>
     </div>
     <div class="sidebar-footer">
