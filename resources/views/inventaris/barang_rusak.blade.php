@@ -138,11 +138,11 @@
                             @if($r->sumber)<div style="font-size:13px">{{ $r->sumber }}</div>@endif
                             @if($r->keterangan)<div style="font-size:11px;color:var(--gray-500)">{{ Str::limit($r->keterangan,40) }}</div>@endif
                         </td>
-                        <td>
-                            <form method="POST" action="{{ route('rusak.destroy', $r->id) }}"
-                                  onsubmit="return confirm('Hapus catatan ini?\n\nStok akan dikembalikan ke kondisi semula.')">
+                        <td style="position:relative;z-index:1">
+                            <form method="POST" action="{{ route('rusak.destroy', $r->id) }}" id="delete-form-{{ $r->id }}">
                                 @csrf @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">
+                                <button type="button" class="btn btn-danger btn-sm delete-btn" id="delete-btn-{{ $r->id }}"
+                                    data-form-id="delete-form-{{ $r->id }}">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </form>
@@ -180,5 +180,60 @@
 .mb-4 { margin-bottom:16px; }
 .form-control { padding:7px 10px; border:1.5px solid var(--gray-200); border-radius:7px; font-size:13px; outline:none; }
 .form-control:focus { border-color:var(--primary); }
+.delete-btn.confirming {
+    background: #b91c1c;
+    animation: pulse-delete 0.6s ease-in-out infinite alternate;
+}
+@keyframes pulse-delete {
+    from { opacity: 1; }
+    to { opacity: 0.7; }
+}
 </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var activeBtn = null;
+    var resetTimer = null;
+
+    document.querySelectorAll('.delete-btn').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            var formId = this.getAttribute('data-form-id');
+
+            if (this.classList.contains('confirming')) {
+                // Second click - submit the form
+                var form = document.getElementById(formId);
+                if (form) {
+                    this.disabled = true;
+                    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+                    form.submit();
+                }
+            } else {
+                // First click - show confirmation
+                // Reset any other active button
+                if (activeBtn && activeBtn !== this) {
+                    activeBtn.classList.remove('confirming');
+                    activeBtn.innerHTML = '<i class="fas fa-trash"></i>';
+                }
+                if (resetTimer) clearTimeout(resetTimer);
+
+                this.classList.add('confirming');
+                this.innerHTML = '<i class="fas fa-check"></i> Yakin?';
+                activeBtn = this;
+
+                // Auto-reset after 3 seconds
+                var self = this;
+                resetTimer = setTimeout(function() {
+                    self.classList.remove('confirming');
+                    self.innerHTML = '<i class="fas fa-trash"></i>';
+                    activeBtn = null;
+                }, 3000);
+            }
+        });
+    });
+});
+</script>
 @endsection
+

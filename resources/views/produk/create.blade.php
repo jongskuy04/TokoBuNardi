@@ -33,13 +33,11 @@
                            class="{{ $errors->has('nama_produk') ? 'is-invalid' : '' }}" required>
                     @error('nama_produk')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
-                <div class="form-group">
-                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
-                        <label style="margin:0">Kategori</label>
-                        <a href="{{ route('kategori.index') }}" class="btn btn-outline btn-sm" style="padding:4px 8px;font-size:11.5px">
-                            <i class="fas fa-tags"></i> Kelola Kategori
-                        </a>
-                    </div>
+                <div class="form-group" style="position: relative;">
+                    <label>Kategori</label>
+                    <a href="{{ route('kategori.index', ['back' => 'create']) }}" class="btn btn-outline btn-sm" style="position: absolute; right: 0; top: -6px; padding: 3px 8px; font-size: 11px; line-height: 1.2;">
+                        <i class="fas fa-tags"></i> Kelola Kategori
+                    </a>
                     <select name="kategori_id">
                         <option value="">-- Pilih Kategori --</option>
                         @foreach($kategoriList as $k)

@@ -13,9 +13,9 @@ class BarangRusakController extends Controller
 {
     public function index(Request $request)
     {
-        $bulan = $request->get('bln', now()->format('m'));
-        $tahun = $request->get('thn', now()->year);
-        $jenis = $request->get('jenis', '');
+        $bulan = $request->get('bln') ?: now()->format('m');
+        $tahun = $request->get('thn') ?: now()->year;
+        $jenis = $request->get('jenis') ?: '';
 
         $query = BarangRusak::with(['produk', 'barangKeluar'])
             ->whereMonth('tanggal', $bulan)
@@ -176,15 +176,18 @@ class BarangRusakController extends Controller
     /** Hapus catatan — kembalikan efek */
     public function destroy(int $id)
     {
-        DB::transaction(function () use ($id) {
-            $br = BarangRusak::findOrFail($id);
+        $br = BarangRusak::findOrFail($id);
+        $jenis = $br->jenis;
+        $jumlah = $br->jumlah;
+        $nilaiReturn = $br->nilaiReturn();
 
+        DB::transaction(function () use ($br) {
             if ($br->jenis === 'rusak') {
                 // Kembalikan stok yang dikurangi
                 Produk::where('id', $br->produk_id)
                     ->increment('stok', $br->jumlah);
             } else {
-                // Return: kurangi stok yang sudah ditambahkan
+                // Return: kurangi stok yang sudah ditambahkan kembali
                 Produk::where('id', $br->produk_id)
                     ->decrement('stok', $br->jumlah);
             }
@@ -192,7 +195,14 @@ class BarangRusakController extends Controller
             $br->delete();
         });
 
+        if ($jenis === 'rusak') {
+            $pesan = "Catatan barang rusak dihapus. Stok bertambah kembali (+{$jumlah}).";
+        } else {
+            $nilaiFormatted = InvenHelper::rupiah($nilaiReturn);
+            $pesan = "Catatan retur dihapus. Stok berkurang kembali (-{$jumlah}). Omset bertambah kembali (+{$nilaiFormatted}).";
+        }
+
         return redirect()->route('rusak.index')
-            ->with('danger', 'Catatan dihapus. Stok dikembalikan ke kondisi semula.');
+            ->with('danger', $pesan);
     }
 }

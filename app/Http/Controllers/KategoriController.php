@@ -24,7 +24,7 @@ class KategoriController extends Controller
             'deskripsi'     => $request->deskripsi,
         ]);
 
-        return redirect()->route('kategori.index')
+        return redirect()->route('kategori.index', $request->only(['back', 'id']))
             ->with('success', 'Kategori berhasil ditambahkan.');
     }
 
@@ -46,7 +46,7 @@ class KategoriController extends Controller
             'deskripsi'     => $request->deskripsi,
         ]);
 
-        return redirect()->route('kategori.index')
+        return redirect()->route('kategori.index', $request->only(['back', 'id']))
             ->with('success', 'Kategori berhasil diperbarui.');
     }
 
@@ -55,12 +55,12 @@ class KategoriController extends Controller
         $kategori = Kategori::withCount('produk')->findOrFail($id);
 
         if ($kategori->produk_count > 0) {
-            return redirect()->route('kategori.index')
+            return redirect()->route('kategori.index', request()->only(['back', 'id']))
                 ->with('warning', "Kategori tidak bisa dihapus karena masih digunakan oleh {$kategori->produk_count} produk.");
         }
 
         $kategori->delete();
-        return redirect()->route('kategori.index')
+        return redirect()->route('kategori.index', request()->only(['back', 'id']))
             ->with('danger', 'Kategori berhasil dihapus.');
     }
 }

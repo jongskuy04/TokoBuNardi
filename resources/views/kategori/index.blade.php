@@ -9,9 +9,19 @@
         <div class="breadcrumb">Produk › Kategori</div>
     </div>
     <div class="btn-group">
-        <a href="{{ route('produk.index') }}" class="btn btn-outline">
-            <i class="fas fa-arrow-left"></i> Kembali ke Produk
-        </a>
+        @if(request()->query('back') === 'create')
+            <a href="{{ route('produk.create') }}" class="btn btn-outline">
+                <i class="fas fa-arrow-left"></i> Kembali ke Tambah Produk
+            </a>
+        @elseif(request()->query('back') === 'edit' && request()->query('id'))
+            <a href="{{ route('produk.edit', request()->query('id')) }}" class="btn btn-outline">
+                <i class="fas fa-arrow-left"></i> Kembali ke Edit Produk
+            </a>
+        @else
+            <a href="{{ route('produk.index') }}" class="btn btn-outline">
+                <i class="fas fa-arrow-left"></i> Kembali ke Produk
+            </a>
+        @endif
     </div>
 </div>
 
@@ -33,10 +43,10 @@
                         <td style="text-align:center"><span class="badge badge-primary">{{ $k->produk_count }}</span></td>
                         <td>
                             <div class="btn-group">
-                                <a href="{{ route('kategori.edit', $k->id) }}" class="btn btn-outline btn-sm">
+                                <a href="{{ route('kategori.edit', [$k->id] + request()->only(['back', 'id'])) }}" class="btn btn-outline btn-sm">
                                     <i class="fas fa-pen"></i>
                                 </a>
-                                <form id="del-kat-{{ $k->id }}" action="{{ route('kategori.destroy', $k->id) }}" method="POST" style="display:none">
+                                <form id="del-kat-{{ $k->id }}" action="{{ route('kategori.destroy', [$k->id] + request()->only(['back', 'id'])) }}" method="POST" style="display:none">
                                     @csrf @method('DELETE')
                                 </form>
                                 <button type="button" class="btn btn-danger btn-sm"
@@ -60,15 +70,15 @@
                 {{ isset($kategori) ? 'Edit' : 'Tambah' }} Kategori
             </h3>
             @if(isset($kategori))
-            <a href="{{ route('kategori.index') }}" class="btn btn-outline btn-sm"><i class="fas fa-times"></i></a>
+            <a href="{{ route('kategori.index', request()->only(['back', 'id'])) }}" class="btn btn-outline btn-sm"><i class="fas fa-times"></i></a>
             @endif
         </div>
         <div class="card-body">
             @if(isset($kategori))
-            <form method="POST" action="{{ route('kategori.update', $kategori->id) }}">
+            <form method="POST" action="{{ route('kategori.update', [$kategori->id] + request()->only(['back', 'id'])) }}">
                 @csrf @method('PUT')
             @else
-            <form method="POST" action="{{ route('kategori.store') }}">
+            <form method="POST" action="{{ route('kategori.store', request()->only(['back', 'id'])) }}">
                 @csrf
             @endif
                 <div class="form-group" style="margin-bottom:14px">

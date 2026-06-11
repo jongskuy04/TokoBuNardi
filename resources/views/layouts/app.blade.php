@@ -198,7 +198,7 @@
             <i class="fas fa-triangle-exclamation" style="color:#ef4444"></i> Barang Rusak & Retur
         </a>
         <a href="{{ route('laporan.index') }}" class="nav-item {{ request()->routeIs('laporan.*') ? 'active' : '' }}">
-            <i class="fas fa-file-chart-column"></i> Laporan Stok
+            <i class="fas fa-file-invoice" style="color:#6366f1"></i> Laporan Stok
         </a>
     </div>
     <div class="sidebar-footer">

@@ -12,8 +12,8 @@ class BarangKeluarController extends Controller
 {
     public function index(Request $request)
     {
-        $bulan = $request->get('bln', now()->format('m'));
-        $tahun = $request->get('thn', now()->year);
+        $bulan = $request->get('bln') ?: now()->format('m');
+        $tahun = $request->get('thn') ?: now()->year;
 
         $rows = BarangKeluar::with('produk')
             ->whereMonth('tanggal', $bulan)
